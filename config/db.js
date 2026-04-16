@@ -3,10 +3,12 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-// ✅ Use full connection string (Aiven gives this)
+if (!process.env.DATABASE_URL) {
+  console.error("❌ DATABASE_URL is missing");
+}
+
 const db = mysql.createPool(process.env.DATABASE_URL);
 
-// ✅ Test connection
 db.getConnection((err, connection) => {
   if (err) {
     console.error("❌ DB Connection Failed:", err.message);
