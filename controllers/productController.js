@@ -23,7 +23,7 @@ export const getAllProducts = (req, res) => {
   db.query(query, params, (err, results) => {
     if (err) {
       console.error("❌ Error fetching products:", err);
-      return res.status(500).json({ error: "Database error" });
+      return res.status(500).json({ error: err.message });
     }
 
     res.json(results);
